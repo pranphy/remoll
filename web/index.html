@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detector ID Search</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="https://userweb.jlab.org/~pgautam/" class="home-button">Home</a>
+    <h1>Detector ID Search</h1>
+    <div class="search-container">
+        <input type="text" id="nameSearch" onkeyup="searchTable()" placeholder="Search by Detector Name...">
+        <input type="text" id="idSearch" onkeyup="searchTable()" placeholder="Search by Detector ID...">
+    </div>
+    <table id="detectorTable">
+        <thead>
+            <tr>
+                <th>Detector Name</th>
+                <th>Detector ID</th>
+                <th>File Path</th>
+                <th>Line Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+    <script src="script.js"></script>
+</body>
+</html>
