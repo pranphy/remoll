@@ -1,5 +1,6 @@
 import os
 import re
+import json
 
 def find_gdml_files(start_file, base_dir='geometry'):
     """
@@ -85,8 +86,6 @@ def find_detectors_in_file(filepath):
     return detectors
 
 if __name__ == "__main__":
-    start_file = 'geometry/mollerMother.gdml'
-
     # We need a comprehensive list of all gdml files, let's find them all first
     all_gdml_files = []
     for root, dirs, files in os.walk('.'):
@@ -110,13 +109,13 @@ if __name__ == "__main__":
     # Sort by Detector ID
     unique_detectors.sort(key=lambda x: int(x['id']))
 
+    # Create directory if it doesn't exist
+    output_dir = 'doc/detid'
+    os.makedirs(output_dir, exist_ok=True)
 
-    # Create markdown table
-    with open('DetectorIDs.md', 'w') as f:
-        f.write("# Detector IDs\n\n")
-        f.write("| Detector Name | Detector ID | File Path | Line Number |\n")
-        f.write("|---|---|---|---|\n")
-        for det in unique_detectors:
-            f.write(f"| {det['name']} | {det['id']} | {det['file']} | {det['line']} |\n")
+    # Write to JSON file
+    output_path = os.path.join(output_dir, 'detector_ids.json')
+    with open(output_path, 'w') as f:
+        json.dump(unique_detectors, f, indent=4)
 
-    print("DetectorIDs.md created successfully.")
+    print(f"{output_path} created successfully.")
